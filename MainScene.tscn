@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MainScene.tres" type="TileSet" id=1]
+[ext_resource path="res://Bird.tscn" type="PackedScene" id=2]
+[ext_resource path="res://MainScene.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 70.0
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 1, 0 )
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0 )
+
+[node name="BirdPool" type="Node2D" parent="."]
+position = Vector2( 176.385, 456.31 )
+
+[node name="Bird" parent="BirdPool" instance=ExtResource( 2 )]
+mass = 1.0
+
+[node name="LaunchArea" type="Area2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 272.442, 347.902 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaunchArea"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="input_event" from="LaunchArea" to="." method="_on_LaunchArea_input_event"]
+[connection signal="mouse_entered" from="LaunchArea" to="." method="_on_LaunchArea_mouse_entered"]
+[connection signal="mouse_exited" from="LaunchArea" to="." method="_on_LaunchArea_mouse_exited"]
